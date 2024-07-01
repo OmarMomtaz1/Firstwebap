@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import com.varabyte.kobweb.compose.css.functions.url
+import com.varabyte.kobweb.compose.css.margin
 import com.varabyte.kobweb.compose.foundation.layout.Arrangement
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.foundation.layout.Row
@@ -17,6 +18,7 @@ import com.varabyte.kobweb.silk.components.layout.Surface
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.request.*
+import io.ktor.util.*
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -33,17 +35,24 @@ import org.jetbrains.compose.web.dom.Text
 fun MainScreen(){
     val ctx = rememberPageContext()
     Surface(modifier = Modifier.fillMaxSize().backgroundImage(url(Res.Image.BACKGROUND))){
-        Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally) {
+        Column(modifier = Modifier.fillMaxSize().padding(top = 20.px), horizontalAlignment = Alignment.CenterHorizontally) {
             Image(
                 modifier = Modifier.size(200.px).margin(top = 30.px),
                 src = Res.Image.TTILE
             )
 
-            Row(modifier = Modifier.margin(top = 100.px)) {
-                MyButton(src = Res.Image.MAT, text = "Prayer Times", onClick = {}, src2 = Res.Image.MAT_BLUE)
-                MyButton(src = Res.Image.TASBIH, text = "Tasbih", onClick = {ctx.router.navigateTo("/tasbih")}, src2 = Res.Image.TASBIH_BLUE)
-                MyButton(src = Res.Image.BOOK, text = "Quran", onClick = {}, src2 = Res.Image.BOOK_BLUE)
-
+            Column(modifier = Modifier.margin(top = 100.px), verticalArrangement = Arrangement.spacedBy(10.px)){
+                Row() {
+                    MyButton(src = Res.Image.MAT, text = "Prayer Times", onClick = {}, src2 = Res.Image.MAT_BLUE)
+                    MyButton(src = Res.Image.TASBIH, text = "Tasbih", onClick = {ctx.router.navigateTo("/tasbih")}, src2 = Res.Image.TASBIH_BLUE)
+                }
+                Row(modifier = Modifier.margin(top = 20.px), horizontalArrangement = Arrangement.spacedBy(10.px)) {
+                    MyButton(src = Res.Image.BOOK, text = "Quran", onClick = {}, src2 = Res.Image.BOOK_BLUE)
+                    MyButton(src = Res.Image.INFO, text = "Info", onClick = {ctx.router.navigateTo("/info")}, src2 = Res.Image.INFO_BLUE)
+                }
+            }
+            Column(modifier = Modifier.margin(top = 150.px).color(color = Color.yellow)) {
+                Text("Made By Omar Momtaz")
             }
         }
     }

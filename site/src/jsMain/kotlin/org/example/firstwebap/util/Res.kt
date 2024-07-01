@@ -11,5 +11,7 @@ object Res {
         const val TASBIH_BLUE = "tasbihBlue.png"
         const val TTILE = "title.png"
         const val BACKGROUND = "darkBackground.png"
+        const val INFO = "info.png"
+        const val INFO_BLUE = "infoBlue.png"
     }
 }
