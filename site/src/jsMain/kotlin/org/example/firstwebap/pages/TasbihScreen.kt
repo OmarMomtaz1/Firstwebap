@@ -3,6 +3,7 @@ package org.example.firstwebap.pages
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
+import com.varabyte.kobweb.compose.css.functions.url
 import com.varabyte.kobweb.compose.foundation.layout.Arrangement
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.ui.Alignment
@@ -11,6 +12,7 @@ import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.core.Page
 import com.varabyte.kobweb.silk.components.forms.Button
 import com.varabyte.kobweb.silk.theme.colors.ColorSchemes
+import org.example.firstwebap.util.Res
 import org.jetbrains.compose.web.css.Color
 import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.dom.Text
@@ -19,7 +21,7 @@ import org.jetbrains.compose.web.dom.Text
 @Composable
 fun TasbihScreen(){
     val num = remember { mutableIntStateOf(0) }
-    Column(modifier = Modifier.fillMaxSize().backgroundColor(color = Color("#212121")), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
+    Column(modifier = Modifier.fillMaxSize().backgroundImage(url(Res.Image.BACKGROUND)), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
 
         Column(
             modifier = Modifier.fontSize(60.px).fontFamily("Serif")

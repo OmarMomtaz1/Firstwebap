@@ -3,6 +3,7 @@ package org.example.firstwebap.pages
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import com.varabyte.kobweb.compose.css.functions.url
 import com.varabyte.kobweb.compose.foundation.layout.Arrangement
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.foundation.layout.Row
@@ -13,6 +14,13 @@ import com.varabyte.kobweb.core.Page
 import com.varabyte.kobweb.core.rememberPageContext
 import com.varabyte.kobweb.silk.components.graphics.Image
 import com.varabyte.kobweb.silk.components.layout.Surface
+import io.ktor.client.*
+import io.ktor.client.call.*
+import io.ktor.client.request.*
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import org.example.firstwebap.util.Res
 import org.jetbrains.compose.web.css.Color
 import org.jetbrains.compose.web.css.dppx
@@ -24,7 +32,7 @@ import org.jetbrains.compose.web.dom.Text
 @Composable
 fun MainScreen(){
     val ctx = rememberPageContext()
-    Surface(modifier = Modifier.fillMaxSize().backgroundColor(Color("#212121"))){
+    Surface(modifier = Modifier.fillMaxSize().backgroundImage(url(Res.Image.BACKGROUND))){
         Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally) {
             Image(
                 modifier = Modifier.size(200.px).margin(top = 30.px),
