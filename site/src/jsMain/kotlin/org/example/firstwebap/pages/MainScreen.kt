@@ -50,6 +50,7 @@ fun MainScreen(){
                     MyButton(src = Res.Image.BOOK, text = "Quran", onClick = {}, src2 = Res.Image.BOOK_BLUE)
                     MyButton(src = Res.Image.INFO, text = "Info", onClick = {ctx.router.navigateTo("/info")}, src2 = Res.Image.INFO_BLUE)
                 }
+
             }
             Column(modifier = Modifier.margin(top = 150.px).color(color = Color.yellow)) {
                 Text("Made By Omar Momtaz")
