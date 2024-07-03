@@ -3,7 +3,8 @@ package org.example.firstwebap.pages
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import com.varabyte.kobweb.compose.css.functions.url
+import com.varabyte.kobweb.compose.css.CSSAngleNumericValue
+import com.varabyte.kobweb.compose.css.functions.*
 import com.varabyte.kobweb.compose.css.margin
 import com.varabyte.kobweb.compose.foundation.layout.Arrangement
 import com.varabyte.kobweb.compose.foundation.layout.Column
@@ -24,11 +25,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.example.firstwebap.util.Res
-import org.jetbrains.compose.web.css.Color
-import org.jetbrains.compose.web.css.dppx
-import org.jetbrains.compose.web.css.px
+import org.jetbrains.compose.web.css.*
 import org.jetbrains.compose.web.dom.Col
 import org.jetbrains.compose.web.dom.Text
+import org.w3c.dom.events.MouseEvent
 
 @Page()
 @Composable
@@ -43,12 +43,12 @@ fun MainScreen(){
 
             Column(modifier = Modifier.margin(top = 100.px), verticalArrangement = Arrangement.spacedBy(10.px)){
                 Row() {
-                    MyButton(src = Res.Image.MAT, text = "Prayer Times", onClick = {}, src2 = Res.Image.MAT_BLUE)
-                    MyButton(src = Res.Image.TASBIH, text = "Tasbih", onClick = {ctx.router.navigateTo("/tasbih")}, src2 = Res.Image.TASBIH_BLUE)
+                    MyButton(src = Res.Image.MAT, text = "Prayer Times", onClick = {})
+                    MyButton(src = Res.Image.TASBIH, text = "Tasbih", onClick = {ctx.router.navigateTo("/tasbih")})
                 }
                 Row(modifier = Modifier.margin(top = 20.px), horizontalArrangement = Arrangement.spacedBy(10.px)) {
-                    MyButton(src = Res.Image.BOOK, text = "Quran", onClick = {}, src2 = Res.Image.BOOK_BLUE)
-                    MyButton(src = Res.Image.INFO, text = "Info", onClick = {ctx.router.navigateTo("/info")}, src2 = Res.Image.INFO_BLUE)
+                    MyButton(src = Res.Image.BOOK, text = "Quran", onClick = {})
+                    MyButton(src = Res.Image.INFO, text = "Info", onClick = {ctx.router.navigateTo("/info")})
                 }
 
             }
@@ -60,11 +60,14 @@ fun MainScreen(){
 }
 
 @Composable
-private fun MyButton(src: String, src2: String, text: String, onClick:() -> Unit) {
+private fun MyButton(src: String, text: String, onClick:() -> Unit) {
     val ctx = rememberPageContext()
+    var modifier = remember { mutableStateOf(Modifier.size(130.px)) }
     val mySrc = remember { mutableStateOf(src) }
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        Image(src = mySrc.value, modifier = Modifier.size(130.px).onClick {onClick()}.onMouseEnter { mySrc.value = src2}.onMouseOut { mySrc.value = src })
+        Image(src = mySrc.value, modifier = modifier.value.onClick {onClick()}.onMouseEnter {modifier.value =  Modifier.filter(brightness(amount = 108.percent), invert(64.percent), sepia(50.percent), contrast(98.percent),
+            hueRotate(angle = 300.deg),
+            saturate(5564.percent)).size(130.px)}.onMouseOut { modifier.value = Modifier.filter().size(130.px)})
         Column(modifier = Modifier.fontSize(20.px).color(Color.yellow).margin(top = 20.px)) {
             Text(text)
         }
