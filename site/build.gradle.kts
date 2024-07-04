@@ -30,42 +30,6 @@ kotlin {
         commonMain.dependencies {
             implementation(compose.runtime)
             implementation(libs.ktor.client.core)
-            val voyagerVersion = "1.1.0-beta02"
-
-            // Multiplatform
-
-            // Navigator
-            implementation("cafe.adriel.voyager:voyager-navigator:$voyagerVersion")
-
-            // Screen Model
-            implementation("cafe.adriel.voyager:voyager-screenmodel:$voyagerVersion")
-
-            // BottomSheetNavigator
-            implementation("cafe.adriel.voyager:voyager-bottom-sheet-navigator:$voyagerVersion")
-
-            // TabNavigator
-            implementation("cafe.adriel.voyager:voyager-tab-navigator:$voyagerVersion")
-
-            // Transitions
-            implementation("cafe.adriel.voyager:voyager-transitions:$voyagerVersion")
-
-            // Android
-
-            // Koin integration
-            implementation("cafe.adriel.voyager:voyager-koin:$voyagerVersion")
-
-            // Hilt integration
-            implementation("cafe.adriel.voyager:voyager-hilt:$voyagerVersion")
-
-            // LiveData integration
-            implementation("cafe.adriel.voyager:voyager-livedata:$voyagerVersion")
-
-            // Desktop + Android
-
-            // Kodein integration
-            implementation("cafe.adriel.voyager:voyager-kodein:$voyagerVersion")
-
-
         }
 
         jsMain.dependencies {
