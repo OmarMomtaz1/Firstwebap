@@ -24,7 +24,7 @@ import org.jetbrains.compose.web.dom.Text
 @Page("/tasbih")
 @Composable
 fun TasbihScreen(){
-    var curr = ColorMode.LIGHT
+    var curr = ColorMode.current
     var colorMode = remember { mutableStateOf( curr) }
     var savedTheme: String = ""
     LaunchedEffect(colorMode.value){
