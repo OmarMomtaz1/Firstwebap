@@ -29,7 +29,7 @@ fun TasbihScreen(){
     var curr = ColorMode.current
     var colorMode = remember { mutableStateOf( curr) }
     var savedTheme: String = ""
-    if (localStorage.getItem("theme") != ColorMode.LIGHT.name && localStorage.getItem("theme") != ColorMode.DARK.name ){
+    if (localStorage.getItem("theme") == null ){
         localStorage.setItem("theme", ColorMode.LIGHT.name)
     } else{
         savedTheme = localStorage.getItem("theme")!!
