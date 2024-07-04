@@ -9,5 +9,6 @@ object Res {
         const val TTILE = "title.png"
         const val BACKGROUND = "darkBackground.png"
         const val INFO = "info.png"
+        const val LIGHT_BG = "wallpaper.jpg"
     }
 }

@@ -30,6 +30,7 @@ kotlin {
         commonMain.dependencies {
             implementation(compose.runtime)
             implementation(libs.ktor.client.core)
+
         }
 
         jsMain.dependencies {
