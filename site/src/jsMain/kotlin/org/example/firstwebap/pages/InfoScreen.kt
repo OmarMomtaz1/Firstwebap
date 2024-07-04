@@ -22,13 +22,17 @@ import org.jetbrains.compose.web.dom.Text
 @Page("/info")
 @Composable
 fun InfoScreen(){
+    val ctx = rememberPageContext()
     var curr = ColorMode.current
     var colorMode = remember { mutableStateOf( curr) }
-    LaunchedEffect(colorMode.value){
-        val savedTheme = localStorage.getItem("theme")
-        colorMode.value = savedTheme?.let { ColorMode.valueOf(it) }!!
+    var savedTheme: String = ""
+    if (localStorage.getItem("theme") != ColorMode.LIGHT.name && localStorage.getItem("theme") != ColorMode.DARK.name ){
+        localStorage.setItem("theme", ColorMode.LIGHT.name)
+    } else{
+        savedTheme = localStorage.getItem("theme")!!
     }
-    val ctx = rememberPageContext()
+
+    colorMode.value = savedTheme.let { ColorMode.valueOf(it) }
     Surface(modifier = Modifier.fillMaxSize().backgroundImage(if (colorMode.value.isDark) url(Res.Image.BACKGROUND) else url(Res.Image.LIGHT_BG))) {
         Column(modifier = Modifier.fillMaxSize().fontSize(60.px).padding(top = 40.px), horizontalAlignment = Alignment.CenterHorizontally){
                 Column(modifier = Modifier.color(color = if (colorMode.value.isDark) Color.yellow else Color.white)) {

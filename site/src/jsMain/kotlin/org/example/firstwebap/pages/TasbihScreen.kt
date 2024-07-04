@@ -11,6 +11,7 @@ import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.core.Page
+import com.varabyte.kobweb.core.rememberPageContext
 import com.varabyte.kobweb.silk.components.forms.Button
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import com.varabyte.kobweb.silk.theme.colors.ColorScheme
@@ -24,18 +25,18 @@ import org.jetbrains.compose.web.dom.Text
 @Page("/tasbih")
 @Composable
 fun TasbihScreen(){
+    val ctx = rememberPageContext()
     var curr = ColorMode.current
     var colorMode = remember { mutableStateOf( curr) }
     var savedTheme: String = ""
-    LaunchedEffect(colorMode.value){
-        if (localStorage.getItem("theme") != ColorMode.LIGHT.name && localStorage.getItem("theme") != ColorMode.DARK.name ){
-            localStorage.setItem("theme", ColorMode.LIGHT.name)
-        } else{
-            savedTheme = localStorage.getItem("theme")!!
-        }
-
-        colorMode.value = savedTheme.let { ColorMode.valueOf(it) }
+    if (localStorage.getItem("theme") != ColorMode.LIGHT.name && localStorage.getItem("theme") != ColorMode.DARK.name ){
+        localStorage.setItem("theme", ColorMode.LIGHT.name)
+    } else{
+        savedTheme = localStorage.getItem("theme")!!
     }
+
+    colorMode.value = savedTheme.let { ColorMode.valueOf(it) }
+
     val num = remember { mutableIntStateOf(0) }
     Column(modifier = Modifier.fillMaxSize().backgroundImage(if (colorMode.value.isDark) url(Res.Image.BACKGROUND) else url(Res.Image.LIGHT_BG)), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
 

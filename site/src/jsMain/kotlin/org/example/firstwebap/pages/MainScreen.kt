@@ -26,10 +26,14 @@ fun MainScreen(){
     val ctx = rememberPageContext()
     var curr = ColorMode.current
     var colorMode = remember { mutableStateOf( curr) }
-    LaunchedEffect(colorMode.value){
-        val savedTheme = localStorage.getItem("theme")
-        colorMode.value = savedTheme?.let { ColorMode.valueOf(it) }!!
+    var savedTheme: String = ""
+    if (localStorage.getItem("theme") != ColorMode.LIGHT.name && localStorage.getItem("theme") != ColorMode.DARK.name ){
+        localStorage.setItem("theme", ColorMode.LIGHT.name)
+    } else{
+        savedTheme = localStorage.getItem("theme")!!
     }
+
+    colorMode.value = savedTheme.let { ColorMode.valueOf(it) }
     Surface(modifier = Modifier.fillMaxSize().backgroundImage(if (colorMode.value.isDark) url(Res.Image.BACKGROUND) else url(Res.Image.LIGHT_BG))){
         Column(modifier = Modifier.fillMaxSize().padding(top = 20.px), horizontalAlignment = Alignment.CenterHorizontally) {
             Image(
