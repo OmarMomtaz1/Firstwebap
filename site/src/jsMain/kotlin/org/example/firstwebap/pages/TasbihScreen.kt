@@ -26,9 +26,15 @@ import org.jetbrains.compose.web.dom.Text
 fun TasbihScreen(){
     var curr = ColorMode.current
     var colorMode = remember { mutableStateOf( curr) }
+    var savedTheme: String = ""
     LaunchedEffect(colorMode.value){
-        val savedTheme = localStorage.getItem("theme")
-        colorMode.value = savedTheme?.let { ColorMode.valueOf(it) }!!
+        if (localStorage.getItem("theme") != "DARK" && localStorage.getItem("theme") != "LIGHT" ){
+            localStorage.setItem("theme", ColorMode.LIGHT.name)
+        } else{
+            savedTheme = localStorage.getItem("theme")!!
+        }
+
+        colorMode.value = savedTheme.let { ColorMode.valueOf(it) }
     }
     val num = remember { mutableIntStateOf(0) }
     Column(modifier = Modifier.fillMaxSize().backgroundImage(if (colorMode.value.isDark) url(Res.Image.BACKGROUND) else url(Res.Image.LIGHT_BG)), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
