@@ -28,22 +28,13 @@ fun TasbihScreen(){
     val ctx = rememberPageContext()
     var curr = ColorMode.current
     var colorMode = remember { mutableStateOf( curr) }
-    var savedTheme: String = ""
-    if (localStorage?.getItem("theme") != ColorMode.LIGHT.name && localStorage.getItem("theme") != ColorMode.DARK.name ){
+    if (localStorage.getItem("theme" ) == null){
         localStorage.setItem("theme", ColorMode.LIGHT.name)
-    } else{
-        localStorage.getItem("theme").also {
-            if (it != null) {
-                savedTheme = it
-            }
-
-            else{
-                savedTheme = ColorMode.LIGHT.name
-            }
-        }
     }
-
+    var savedTheme: String = ""
+    savedTheme = localStorage.getItem("theme")!!
     colorMode.value = savedTheme.let { ColorMode.valueOf(it) }
+
 
     val num = remember { mutableIntStateOf(0) }
     Column(modifier = Modifier.fillMaxSize().backgroundImage(if (colorMode.value.isDark) url(Res.Image.BACKGROUND) else url(Res.Image.LIGHT_BG)), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
