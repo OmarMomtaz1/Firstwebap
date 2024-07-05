@@ -25,13 +25,11 @@ fun InfoScreen(){
     val ctx = rememberPageContext()
     var curr = ColorMode.current
     var colorMode = remember { mutableStateOf( curr) }
-    if (localStorage.getItem("the" ) == null){
+    if (localStorage.getItem("theme" ) == null){
             localStorage.setItem("theme", ColorMode.LIGHT.name)
     }
     var savedTheme: String = ""
     savedTheme = localStorage.getItem("theme")!!
-    colorMode.value = savedTheme.let { ColorMode.valueOf(it) }
-
 
 
     colorMode.value = savedTheme.let { ColorMode.valueOf(it) }
